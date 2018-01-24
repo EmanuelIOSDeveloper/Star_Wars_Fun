@@ -25,7 +25,7 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated);
-        
+        //getPeopleOfStarWars()
         buildUI()
     }
     
@@ -51,5 +51,19 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
         
         return cell
     }
+    
+    
+//Services Request
+//    func getPeopleOfStarWars() {
+//        Alamofire.request("https://swapi.co/api/people").responseJSON {response in
+//
+////            if let caractersJSON = response.result.value {
+////                let caracterObject:Dictionary = caractersJSON as! Dictionary<String, Any>
+////
+////            }
+//        }
+//
+//        print("Loading web service")
+//    }
 }
 
