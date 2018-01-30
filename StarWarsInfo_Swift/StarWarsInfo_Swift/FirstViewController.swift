@@ -7,20 +7,23 @@
 //
 
 import UIKit
+import Alamofire
 
-class FirstViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
-
-    
-
+class FirstViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+   
     @IBOutlet weak var caractersTitleLabel: UILabel!
-    @IBOutlet weak var caractersCollectionView: UICollectionView!
+    @IBOutlet weak var caractersTableView: UITableView!
+    
+    var caracters = [Any]()
+    static let kResults = "results"
+    static let kName = "name"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        caractersCollectionView.delegate = self
-        caractersCollectionView.dataSource = self
-        
+        caractersTableView.delegate = self;
+        caractersTableView.dataSource = self;
+    
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -30,40 +33,44 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func buildUI() {
-        caractersTitleLabel.text            = "Star Wars Caracters"
-        caractersTitleLabel.backgroundColor = UIColor .black
-        caractersTitleLabel.textColor       = UIColor .red
+        caractersTitleLabel.text = "Star Wars Caracters"
+        caractersTableView.tableFooterView = UIView()
 
     }
-    
-//UICollectionView Data Source delegate
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+ // UITableView Data Source delegates
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       // return self.caracters.count
+        return 6;
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customCell", for: indexPath) as! CollectionViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = caractersTableView.dequeueReusableCell(withIdentifier: "customCell") as! CaractersTableViewCell
+        //let caracterName:NSString = self.caracters[indexPath.row] as! NSString
+        //cell.caracterNameLabel.text = caracterName as String
         
-        cell.nameLabel.text = "Darth Maul"
-        cell.specieLabel.text = "Dathomirian"
-        cell.numberVehicleLabel.text = "four"
+        cell.caracterNameLabel.text = "Darth Maul"
+        cell.caracterSpecieLabel.text = "Dathomirian"
+        cell.caracterVehicleNumberLabel.text = "1"
         
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 88.0
+    }
     
 //Services Request
-//    func getPeopleOfStarWars() {
-//        Alamofire.request("https://swapi.co/api/people").responseJSON {response in
+    func getPeopleOfStarWars() {
+//        Alamofire.request("https://swapi.co/api/people/?page=1").responseJSON { response in
 //
-////            if let caractersJSON = response.result.value {
-////                let caracterObject:Dictionary = caractersJSON as! Dictionary<String, Any>
-////
-////            }
+//            if let json = response.result.value {
+//                let caractersObjects:Dictionary = json as!Dictionary<String, Any>
+//
+//                let nextObject:NSArray = caractersObjects[FirstViewController.kResults] as! NSArray
+//                self.caracters =  nextObject as! [NSArray]
+//            }
+//
 //        }
-//
-//        print("Loading web service")
-//    }
-}
+    }
 
+}

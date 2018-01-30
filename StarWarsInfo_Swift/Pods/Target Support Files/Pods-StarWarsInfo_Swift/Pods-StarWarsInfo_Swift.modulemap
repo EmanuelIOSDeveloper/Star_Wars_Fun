@@ -1,0 +1,6 @@
+framework module Pods_StarWarsInfo_Swift {
+  umbrella header "Pods-StarWarsInfo_Swift-umbrella.h"
+
+  export *
+  module * { export * }
+}
